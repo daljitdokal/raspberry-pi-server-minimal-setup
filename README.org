@@ -10,7 +10,7 @@
 3. ethernet or wireless LAN with a working internet connection
 
 ** Install instructions
-1. Format SD card or [[https://github.com/daljitdokal/raspbian-minimal-setup/blob/main/Restore%20USB%20Drive.org][Reset of it has been used before]]
+1. Format SD card or [[https://github.com/daljitdokal/raspbian-minimal-setup/blob/main/Restore%20USB%20Drive.org][Reset if it has been used before]]
 2. Write the installer to the SD card
 3. Provide unattended installation settings (optional) or follow the first boot steps later
 4. Power on the Raspberry Pi and wait until the installation is done
