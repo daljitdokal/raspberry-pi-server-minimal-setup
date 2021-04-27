@@ -12,17 +12,24 @@
 
 ** Select disk
 Type:
+
 DISKPART> list disk
+
 Identify the disk that corresponds to the USB. Be sure it is the one. We assume on this post that the correct disk is X.
+
 Then type:
+
 DISKPART> select disk X
+
 
 ** Delete disk
 Type:
+
 DISKPART> clean
 
 ** Create partition
 Type:
+
 DISKPART> create partition primary
 
 **Format USB
