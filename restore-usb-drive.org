@@ -1,6 +1,6 @@
 
 # -*- ii: ii; -*-
-#+TITLE: How To Restore USB Drive Back To Original Full Capacity in Windows 10
+#+TITLE: How To Restore USB Drive in Windows 10
 #+AUTHOR: Daljit Singh
 #+EMAIL: daljit.dokal@yahoo.co.nz
 #+DATE: 28th April 2021
