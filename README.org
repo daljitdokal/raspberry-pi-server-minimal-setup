@@ -18,6 +18,6 @@
 ** Documentation
 https://github.com/FooDeas/raspberrypi-ua-netinst
 
-** Steps
+* Steps
 
-* Step -1
+** Step -1
