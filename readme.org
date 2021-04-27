@@ -20,7 +20,9 @@ https://github.com/FooDeas/raspberrypi-ua-netinst
 
 * Steps
 
-** Step - 1
-[[https://github.com/FooDeas/raspberrypi-ua-netinst/releases/latest][Download the .zip file]].
+** Step 1: Download Raspbian
+1. [[https://github.com/FooDeas/raspberrypi-ua-netinst/releases/latest][Download the .zip file]].
+2. Unzip and copy to USB drive
  
-** Step - 2
+** Step 2: Apply custom install configuration
+1. Add [https://github.com/daljitdokal/raspbian-minimal-setup/blob/main/installer-config.txt][installer-config.txt]]
