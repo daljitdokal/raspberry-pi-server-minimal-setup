@@ -1,1 +1,31 @@
 
+# -*- ii: ii; -*-
+#+TITLE: How To Restore USB Drive Back To Original Full Capacity in Windows 10
+#+AUTHOR: Daljit Singh
+#+EMAIL: daljit.dokal@yahoo.co.nz
+#+DATE: 28th April 2021
+
+** Restore USB Drive
+1. Run DiskPart
+2. Go to Start > Run command or press Windows + R.
+3. Type “diskpart” and press Enter
+
+** Select disk
+Type:
+DISKPART> list disk
+Identify the disk that corresponds to the USB. Be sure it is the one. We assume on this post that the correct disk is X.
+Then type:
+DISKPART> select disk X
+
+** Delete disk
+Type:
+DISKPART> clean
+
+** Create partition
+Type:
+DISKPART> create partition primary
+
+**Format USB
+Go to Computer and right click on the USB drive, then select “Format…”.
+
+Select the desired options and click “Format”.
