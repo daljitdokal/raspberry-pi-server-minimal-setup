@@ -31,4 +31,4 @@ https://github.com/FooDeas/raspberrypi-ua-netinst
 
 ** Step 3: Copy the install media to sd card
 1. Copy everthing to USB Drive
-2. Add memory card to Raspberrt Pi and turn on to start trhe boot process (will take 20 min)
+2. Add memory card to Raspberrt Pi and turn on to start the boot process (will take 20 min)
