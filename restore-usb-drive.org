@@ -32,7 +32,7 @@ Type:
 
 DISKPART> create partition primary
 
-**Format USB
+** Format USB
 Go to Computer and right click on the USB drive, then select “Format…”.
 
 Select the desired options and click “Format”.
