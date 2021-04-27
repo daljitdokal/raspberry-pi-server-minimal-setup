@@ -26,5 +26,5 @@ https://github.com/FooDeas/raspberrypi-ua-netinst
  
 ** Step 2: Apply custom install configuration
 1. Go to "<USB DRIVE>\raspberrypi-ua-netinst\config\"
-2. Replace [https://github.com/daljitdokal/raspbian-minimal-setup/blob/main/installer-config.txt][installer-config.txt]]
+2. Replace [[https://github.com/daljitdokal/raspbian-minimal-setup/blob/main/installer-config.txt][installer-config.txt]]
 3. Update "Login user" details and "Wifi" details
