@@ -4,7 +4,7 @@
 3. ethernet or wireless LAN with a working internet connection
 
 ## Install instructions
-1. Format SD card or [[https://github.com/daljitdokal/raspberry-pi-server-minimal-setup/blob/ubuntu-server/restore-usb-drive.org][Restore USB Drive if it has been used before]]
+1. Format SD card or [(Restore USB Drive if it has been used before)[https://github.com/daljitdokal/raspberry-pi-server-minimal-setup/blob/ubuntu-server/restore-usb-drive.org]]
 2. Write the installer to the SD card
 3. Provide unattended installation settings (optional) or follow the first boot steps later
 4. Power on the Raspberry Pi and wait until the installation is done
