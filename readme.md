@@ -1,4 +1,4 @@
-# -*- ii: ii; -*-
+
 #+TITLE: Ununtu server minimal setup
 #+AUTHOR: Daljit Singh
 #+EMAIL: daljit.dokal@yahoo.co.nz
