@@ -1,9 +1,3 @@
-**AUTHOR: Daljit Singh**
-#+TITLE: Ununtu server minimal setup
-#+AUTHOR: Daljit Singh
-#+EMAIL: daljit.dokal@yahoo.co.nz
-#+DATE: 31th Oct 2021
-
 ## Requirements
 1. Raspberry Pi (from model 1B up to 4B, 3A+, 3B+ or Zero including Zero W)
 2. SD card with at least 1GB, or at least 128MB for USB root install (without customization)
