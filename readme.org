@@ -1,5 +1,5 @@
 # -*- ii: ii; -*-
-#+TITLE: Raspbian minimal setup
+#+TITLE: Raspbian server minimal setup
 #+AUTHOR: Daljit Singh
 #+EMAIL: daljit.dokal@yahoo.co.nz
 #+DATE: 28th April 2021
