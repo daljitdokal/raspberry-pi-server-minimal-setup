@@ -11,31 +11,23 @@
 Create the bootable SD Card with a minimal install of Ubuntu Server 20.04 x64, which is a free and open source operating system based on Debian.
 
 ## Step 1: Download sd card imaging
-a. Via script
 - To simplify the sd card creation process we can use the open source rpi-imager utility, the code snippet below will download the latest release:
 ```bash
+export GET_USER="Dalji" # $USER
 echo Downloading latest release zip from github
 curl -s https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest \
       | grep "browser_download_url.*exe" \
       | cut -d : -f 2,3 \
       | tr -d \" \
-      | wget -O /mnt/c/Users/$USER/Downloads/imager.exe -i -
+      | wget -O /mnt/c/Users/$GET_USER/Downloads/imager.exe -i -
 
 echo Checking file is now present
-ls -l /mnt/c/Users/$USER/Downloads/imager.exe
+ls -l /mnt/c/Users/$GET_USER/Downloads/imager.exe
 ```
 - With the software downloaded, let’s fire it up the installer and get it setup.
 ```bash
-cmd.exe /mnt/c/Users/$USER/Downloads/imager.exe
+cmd.exe /mnt/c/Users/$GET_USER/Downloads/imager.exe
 ```
-
-b. Manual
-- Get latest version
-```bash
-curl -s https://api.github.com/repos/raspberrypi/rpi-imager/releases/latest  | grep "browser_download_url.*exe" | cut -d : -f 2,3 | tr -d \"
-```
-- Copy url and download latest image utility.
-- Run the utility.
 
 ## Step 3: Build image to SD card
 - Put the 'SD' card and begin the imaging process.
