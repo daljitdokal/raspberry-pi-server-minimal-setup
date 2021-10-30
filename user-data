@@ -1,0 +1,59 @@
+#cloud-config
+hostname: raspi01
+
+
+# ==================================================================
+# Add users to the system
+# ==================================================================
+users:
+  - name: daljit
+    gecos: Daljit Singh
+    primary_group: daljit
+    groups: users, admin
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDETXf0BqcX1UzKUibGpsV+tSzFhKx7fH/8y/zs2Yjdv1LOyHcc7yQM8ICNY3nfhl2czJfqL66JhTz/WG2OE+PIJLMa7cOoGXM+UgGZ5EMxnTpRgJBSbBrxjGTjKxvK5RkFVx9gFjfmrCEBOy52AzRvnr2UPx21ZBCVJougwpthE39Wo9eOVY66Dz1k6dMSH82dcr4l9WjZpFHj93V5NZnKSHEvJqFQb1E7mslST93lJ+yedgit8DsNToVADKAj4qCtbqU8QWAR+SNCEhNLXY0TJrxeEDDdryvDvPHpJSsfdYx3eN8caMusg9cfKeAUa7PckznnPf43tgr4D/stCeBsq2PSSTAKCiJu9P3uSYYZfFzOiF/G+3mB49csCzMYRMWZJMqFaF0BId2ERiCUut8KXKDIjfiGq3BilhZQwhBkeSaHrV6R94sgGpaBhCy6u15FD+zAUjDvkfUElrXjkfzRMFoaOmadhqtm3cIYn+zWhjquVprJIezkbGLboKm2DuPI/1X5Kx9HRlJujb/rUY3UdtiAqyTF7Gt3X5u/sjumyjwfldRrnqGdoUu6yXN+o7eAoF1VygEQKI5yp4rEqJ9dhxY0w/4ECBSqtjwS9eNahKjo5oxfphFkRW316Pu6ws2UiSNUgzAANWBamyslfS4/lgsCBCqMCmB6VW+xpk0vMw== geekywebmaster-laptop
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+# ==================================================================
+
+
+
+# ==================================================================
+# Add packages to the system
+# ==================================================================
+package_upgrade: true
+packages:
+  - nano
+  - curl
+  - htop
+  - git
+  - smartmontools
+  - fail2ban
+  - knockd
+  - glusterfs-server
+  - sed
+  - rsync
+# ==================================================================
+
+
+
+# ==================================================================
+# Localisation
+# ==================================================================
+user-data:
+  timezone: Pacific/Auckland
+locale: en_NZ
+# ==================================================================
+
+
+
+# ==================================================================
+# Harden ssh and set bash prompt
+# ==================================================================
+runcmd:
+  - sed -i -e '/^#Port/s/^.*$/Port 2142/' /etc/ssh/sshd_config
+  - sed -i -e '/^#PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - sed -i -e '$aAllowUsers daljit' /etc/ssh/sshd_config
+  - restart ssh
+  - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '" >> /home/daljit/.bashrc
+# ==================================================================
