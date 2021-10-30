@@ -1,4 +1,4 @@
-
+**AUTHOR: Daljit Singh**
 #+TITLE: Ununtu server minimal setup
 #+AUTHOR: Daljit Singh
 #+EMAIL: daljit.dokal@yahoo.co.nz
