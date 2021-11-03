@@ -1,5 +1,5 @@
 #cloud-config
-hostname: raspi01
+hostname: geeky-test-server
 
 
 # ==================================================================
