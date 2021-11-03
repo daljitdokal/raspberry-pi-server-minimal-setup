@@ -2,6 +2,6 @@ version: 2
 ethernets:
   eth0:
     addresses:
-      - 192.168.1.123
+      - 192.168.0.201
     gateway4: 192.168.0.1
     nameservers: 1.1.1.1
