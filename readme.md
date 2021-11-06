@@ -49,10 +49,7 @@ Note: The code block below assumes the SD Card boot partition will be `D:\`. You
 ```bash
 echo Mount the new partition in wsl
 sudo mkdir /mnt/d
-sleep 5
-
 sudo mount -t drvfs d: /mnt/d/
-sleep 5
 
 echo Copy the contents of installer to sd
 cp network-config /mnt/d/
@@ -60,7 +57,6 @@ sleep 1
 cp user-data /mnt/d/
 
 # We need to wait before we can eject
-sleep 5
 sudo umount /mnt/d
 ```
 
