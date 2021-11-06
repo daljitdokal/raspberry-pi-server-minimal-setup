@@ -55,6 +55,4 @@ runcmd:
   - sed -i -e '$aAllowUsers daljit' /etc/ssh/sshd_config
   - restart ssh
   - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '" >> /home/daljit/.bashrc
-  - curl -sfL https://get.k3s.io | sh -
-  - k3s kubectl get node
 # ==================================================================
