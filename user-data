@@ -50,7 +50,7 @@ locale: en_NZ
 # Harden ssh, set bash prompt and install K3s
 # ==================================================================
 runcmd:
-  - sed -i -e '/^#Port/s/^.*$/Port 2222/' /etc/ssh/sshd_config
+  - sed -i -e '/^#Port/s/^.*$/Port 2244/' /etc/ssh/sshd_config
   - sed -i -e '/^#PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
   - sed -i -e '$aAllowUsers daljit' /etc/ssh/sshd_config
   - restart ssh
