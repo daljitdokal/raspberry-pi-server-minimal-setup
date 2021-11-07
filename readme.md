@@ -54,14 +54,8 @@ sudo mount -t drvfs d: /mnt/d/
 echo Copy the contents of installer to sd
 cp network-config /mnt/d/
 cp user-data /mnt/d/
+cp cmdline.txt /mnt/d/
 
 # We need to wait before we can eject
 sudo umount /mnt/d
 ```
-
-## Step 4: Add custom group for k3s
-Filename cmdline.txt
-```bash
-cgroup_memory=1 cgroup_enable=memory
-```
-
