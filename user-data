@@ -47,19 +47,12 @@ locale: en_NZ
 
 
 # ==================================================================
-# Harden ssh, set bash prompt and install K3s
+# Harden ssh, set bash prompt
 # ==================================================================
 runcmd:
+  - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '" >> /home/daljit/.bashrc
   - sed -i -e '/^#Port/s/^.*$/Port 2222/' /etc/ssh/sshd_config
   - sed -i -e '/^#PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
   - sed -i -e '$aAllowUsers daljit' /etc/ssh/sshd_config
   - systemctl restart sshd
-  - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '" >> /home/daljit/.bashrc
-  - echo "Install k3s with single node"
-  - wget https://get.k3s.io/ -O k3s.sh
-  - chmod +x k3s.sh
-  - ./k3s.sh
-  - k3s kubectl get node
-  - rm k3s.sh
-
 # ==================================================================
