@@ -53,6 +53,9 @@ runcmd:
   - sed -i -e '/^#Port/s/^.*$/Port 2222/' /etc/ssh/sshd_config
   - sed -i -e '/^#PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
   - sed -i -e '$aAllowUsers daljit' /etc/ssh/sshd_config
-  - systemctl restart sshd.service
+  - cat /etc/ssh/sshd_config
+  - systemctl restart sshd
+  - systemctl status sshd
   - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w\$\[\033[00m\] '" >> /home/daljit/.bashrc
+  - cat .bashrc
 # ==================================================================
