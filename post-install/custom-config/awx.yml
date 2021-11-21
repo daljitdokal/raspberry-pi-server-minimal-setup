@@ -1,0 +1,25 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+spec:
+  service_type: NodePort
+  ingress_type: ingress
+  hostname: awx.example.co.nz
+  service_labels: |
+    environment: production
+  web_resource_requirements:
+    requests:
+      cpu: 256m
+      memory: 512Mi
+    limits:
+      cpu: 512m
+      memory: 1024Mi
+  task_resource_requirements:
+    requests:
+      cpu: 256m
+      memory: 512Mi
+    limits:
+      cpu: 512m
+      memory: 1024Mi
