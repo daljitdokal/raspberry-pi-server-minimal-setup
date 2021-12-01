@@ -6,11 +6,13 @@
     - name: Create variables
       set_fact:
         get_awx_namespace: "awx"
+        set_dest_path: "/tmp/awx-operator"
 
     - name: Download awx-operator from github
       ansible.builtin.git:
         repo: https://github.com/ansible/awx-operator.git
-        dest: ~/Downloads
+        dest: "{{ set_dest_path }}"
+        force: true
 
     - name: Create new namespace
       shell: |
@@ -19,16 +21,24 @@
 
     - name: Deploy awx-operator
       shell: |
-        cd ~/Downloads
+        # Get latest tag
+        cd "{{ set_dest_path }}"
         export RELEASE_TAG=`curl -s https://api.github.com/repos/ansible/awx-operator/releases/latest | grep tag_name | cut -d '"' -f 4`
+        echo $RELEASE_TAG
         git checkout $RELEASE_TAG
-        # export getString="sed 's\/x86_64\/amd64\/')"
-        # export setString="sed '-e 's\/x86_64\/amd64\/' -e 's\/aarch64\/arm64\/')"
-        # sed -i "s/$getString/$setString/i" Makefile
+
+        # Update path
+        export getString="sed 's\/x86_64\/amd64\/')"
+        export setString="sed -e 's\/x86_64\/amd64\/' -e 's\/aarch64\/arm64\/')"
+        sed -i "s/$getString/$setString/i" Makefile
+
+        # Deploy awx
         export NAMESPACE={{ get_awx_namespace }}
         make deploy
+      become: true
 
     - name: Create instance of awx
       shell: |
-        k3s kubectl apply -f ../custom-config/awx.yml
+        # k3s kubectl apply -f ../custom-config/awx.yml
+        echo "Create instance of awx"
       become: true
