@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: awx
+spec:
+  containers:
+    - image: 'quay.io/ansible/awx-ee:0.4.0'
+      name: worker
+      args:
+        - ansible-runner
+        - worker
+        - '--private-data-dir=/runner'
+      volumeMounts:
+        - mountPath: /mnt/backup
+          name: backup
+  volumes:
+  - name: backup
+    hostPath:
+      path: /mnt/backup
