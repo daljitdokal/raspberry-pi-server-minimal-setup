@@ -6,13 +6,6 @@
     - name: Create variables
       set_fact:
         get_awx_namespace: "awx"
-        set_dest_path: "/tmp/awx-operator"
-
-    - name: Download awx-operator from github
-      ansible.builtin.git:
-        repo: https://github.com/ansible/awx-operator.git
-        dest: "{{ set_dest_path }}"
-        force: true
 
     - name: Create new namespace
       shell: |
@@ -27,14 +20,13 @@
         echo $RELEASE_TAG
         git checkout $RELEASE_TAG
 
-        # Update path
-        export getString="sed 's\/x86_64\/amd64\/')"
-        export setString="sed -e 's\/x86_64\/amd64\/' -e 's\/aarch64\/arm64\/')"
-        sed -i "s/$getString/$setString/i" Makefile
+        # Get oprator
+        wget https://raw.githubusercontent.com/ansible/awx-operator/0.11.0/deploy/awx-operator.yaml
+
 
         # Deploy awx
         export NAMESPACE={{ get_awx_namespace }}
-        make deploy
+
       become: true
 
     - name: Create instance of awx
