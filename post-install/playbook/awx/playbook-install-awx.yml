@@ -5,32 +5,26 @@
   tasks:
     - name: Create variables
       set_fact:
-        get_awx_namespace: "awx"
+        get_awx_namespace: awx
+        set_dest_path: "/tmp/awx-operator"
 
     - name: Create new namespace
       shell: |
         k3s kubectl create namespace {{ get_awx_namespace }} --dry-run=client -o yaml | k3s kubectl apply -f -
       become: true
-
     - name: Deploy awx-operator
       shell: |
-        # Get latest tag
-        cd "{{ set_dest_path }}"
-        export RELEASE_TAG=`curl -s https://api.github.com/repos/ansible/awx-operator/releases/latest | grep tag_name | cut -d '"' -f 4`
-        echo $RELEASE_TAG
-        git checkout $RELEASE_TAG
-
-        # Get oprator
-        wget https://raw.githubusercontent.com/ansible/awx-operator/0.11.0/deploy/awx-operator.yaml
-
+        cd {{ set_dest_path }}
+        wget https://raw.githubusercontent.com/ansible/awx-operator/0.13.0/deploy/awx-operator.yaml
+        sed -i -e 's/quay.io\/ansible/public.ecr.aws\/ussvgr/g' awx-operator.yaml
 
         # Deploy awx
         export NAMESPACE={{ get_awx_namespace }}
-
+        make deploy
       become: true
 
     - name: Create instance of awx
       shell: |
-        # k3s kubectl apply -f ../custom-config/awx.yml
+        k3s kubectl apply -f install-awx.yaml
         echo "Create instance of awx"
       become: true

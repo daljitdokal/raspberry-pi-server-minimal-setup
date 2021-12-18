@@ -23,3 +23,7 @@ spec:
     limits:
       cpu: 512m
       memory: 1024Mi
+  image: daljitdokal/awx-arm64
+  image_version: 19.3.0
+  image_pull_policy: IfNotPresent
+  control_plane_ee_image: daljitdokal/awx-ee-arm64:0.6.0

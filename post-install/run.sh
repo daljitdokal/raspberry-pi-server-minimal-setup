@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install dependencies
 ansible-galaxy collection install awx.awx
 
