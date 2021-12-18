@@ -6,25 +6,41 @@
     - name: Create variables
       set_fact:
         get_awx_namespace: awx
-        set_dest_path: "/tmp/awx-operator"
-
-    - name: Create new namespace
-      shell: |
-        k3s kubectl create namespace {{ get_awx_namespace }} --dry-run=client -o yaml | k3s kubectl apply -f -
+        set_local_path: "../awx/"
+        set_dest_path: "/tmp/install-awx"
+    
+    - name: Copy files to remote server
+      ansible.builtin.copy:
+        src: "{{ set_local_path }}"
+        dest: "{{ set_dest_path }}"
       become: true
+
+    # - name: Create new namespace
+    #   shell: |
+    #     k3s kubectl create namespace {{ get_awx_namespace }} --dry-run=client -o yaml | k3s kubectl apply -f -
+    #   become: true
+    - name: Create a k8s namespace
+      k8s:
+        name: awx
+        api_version: v1
+        kind: Namespace
+        state: present
+
     - name: Deploy awx-operator
       shell: |
         cd {{ set_dest_path }}
-        wget https://raw.githubusercontent.com/ansible/awx-operator/0.13.0/deploy/awx-operator.yaml
-        sed -i -e 's/quay.io\/ansible/public.ecr.aws\/ussvgr/g' awx-operator.yaml
-
-        # Deploy awx
-        export NAMESPACE={{ get_awx_namespace }}
-        make deploy
+        k3s kubectl apply -f install-awx-operator.yaml -n "{{ get_awx_namespace }}"
       become: true
 
     - name: Create instance of awx
       shell: |
-        k3s kubectl apply -f install-awx.yaml
+        cd {{ set_dest_path }}
+        k3s kubectl apply -f install-awx.yaml -n "{{ get_awx_namespace }}"
         echo "Create instance of awx"
+      become: true
+
+    - name: Remove copied files
+      ansible.builtin.file:
+        path: "{{ set_local_path }}"
+        state: absent
       become: true
