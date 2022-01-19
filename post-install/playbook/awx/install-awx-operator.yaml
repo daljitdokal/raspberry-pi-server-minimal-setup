@@ -719,7 +719,7 @@ spec:
           env:
             # Watch all namespaces (cluster-scoped).
             - name: WATCH_NAMESPACE
-              value: ""
+              value: "awx"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
