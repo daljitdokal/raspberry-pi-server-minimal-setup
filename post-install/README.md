@@ -52,6 +52,12 @@ Wait for 30-40 minutes to fully complete the process.
 
 ## Configure and schedule `awx` job
 ### Daily mysql database backup from remote server
+
+Edit 'global_vars/example_awx_config_vars.yaml' to pass the required values:
+```bash
+cp global_vars/example_awx_config_vars.yaml global_vars/awx_config_vars.yaml
+```
+
 This script will execute the palybook.
 ```bash
 ./step2-post-install-config.sh
