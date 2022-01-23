@@ -43,11 +43,21 @@ Start provisioning of the cluster using the following command:
 ./run.sh
 ```
 
-## Kubeconfig
-
-To get access to your **Kubernetes** cluster just
-
+## Install `k3s` and `awx`
+This script will execute the palybook.
 ```bash
-scp debian@master_ip:~/.kube/config ~/.kube/config
+./step1-post-install.sh
 ```
+Wait for 30-40 minutes to fully complete the process.
+
+## Configure and schedule `awx` job
+### Daily mysql database backup from remote server
+This script will execute the palybook.
+```bash
+./step2-post-install-config.sh
+```
+Wait for 1-2 minutes to fully complete the process.
+
+
+
 
