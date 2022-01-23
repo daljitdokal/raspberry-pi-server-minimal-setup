@@ -1,0 +1,77 @@
+---
+- name: Playbook to create custom awx configration
+  hosts: k3s_cluster
+  gather_facts: false
+  vars_files:
+    - ../../global_vars/awx_config_vars.yaml
+  collections:
+    - awx.awx
+  tasks:
+    - name: Create awx auth variables
+      shell: |
+        echo "http://{{ lookup('dig', ansible_host) }}:$(sudo k3s kubectl get service awx-service -n awx -o yaml | grep nodePort | awk '{print $2}' )"
+        echo "$(sudo k3s kubectl get secret awx-admin-password -o jsonpath="{.data.password}" -n awx | base64 --decode)"
+      register: awx_auth
+      become: true
+    
+    - name: Create a new organization
+      tower_organization:
+        name: "{{ set_tower_organization_name }}"
+        description: "{{ set_tower_organization_name }}"
+        state: present
+      environment:
+        TOWER_HOST: "{{ awx_auth.stdout_lines[0] }}"
+        TOWER_USERNAME: "admin"
+        TOWER_PASSWORD: "{{ awx_auth.stdout_lines[1] }}"
+    
+    - name: Create an Inventory
+      tower_inventory:
+        name: "{{ set_tower_inventory_name }}"
+        description: "{{ set_tower_inventory_name }}"
+        organization: "{{ set_tower_organization_name }}"
+        state: present
+        variables:
+          ansible_connection: ssh
+          ansible_user: "{{ set_inventory_ansible_user }}"
+      environment:
+        TOWER_HOST: "{{ awx_auth.stdout_lines[0] }}"
+        TOWER_USERNAME: "admin"
+        TOWER_PASSWORD: "{{ awx_auth.stdout_lines[1] }}"
+
+    - name: Create a Host
+      tower_host:
+        name: "{{ set_tower_host_name }}"
+        inventory: "{{ set_tower_inventory_name }}"
+        state: present
+        variables:
+          ansible_host: "{{ set_tower_host_url }}"
+      environment:
+        TOWER_HOST: "{{ awx_auth.stdout_lines[0] }}"
+        TOWER_USERNAME: "admin"
+        TOWER_PASSWORD: "{{ awx_auth.stdout_lines[1] }}"
+
+    - name: Create a Project
+      tower_project:
+        name: "{{ set_tower_project_name }}"
+        organization: "{{ set_tower_organization_name }}"
+        scm_type: git
+        scm_url: "{{ set_tower_project_git_url }}"
+      environment:
+        TOWER_HOST: "{{ awx_auth.stdout_lines[0] }}"
+        TOWER_USERNAME: "admin"
+        TOWER_PASSWORD: "{{ awx_auth.stdout_lines[1] }}"
+
+    - name: Create a Job Template
+      tower_job_template:
+        name: "{{ set_tower_job_template_name }}"
+        project: "{{ set_tower_project_name }}"
+        inventory: "{{ set_tower_inventory_name }}"
+        playbook: "{{ set_tower_job_template_playbook_name }}"
+        extra_vars:
+          db_backup_folder_path: "{{ set_remote_db_backup_folder_path }}"
+          local_db_backup_folder_path: "{{ set_local_db_backup_folder_path }}"
+          db_file_name_pattern_to_delete: "{{ set_remote_db_file_name_pattern_to_delete }}"
+      environment:
+        TOWER_HOST: "{{ awx_auth.stdout_lines[0] }}"
+        TOWER_USERNAME: "admin"
+        TOWER_PASSWORD: "{{ awx_auth.stdout_lines[1] }}"
