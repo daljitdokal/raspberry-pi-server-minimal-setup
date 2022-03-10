@@ -43,3 +43,16 @@ user-data:
   timezone: Pacific/Auckland
 locale: en_NZ
 # ==================================================================
+
+
+
+#================================================================
+# Post install ssh configuration
+#================================================================
+runcmd:
+ - sed -i "s/#Port 22/Port 2222/" /etc/ssh/sshd_config
+ - systemctl restart sshd
+ - echo " " >>  ~/.bashrc
+ - echo "# Update color" >>  ~/.bashrc
+ - echo "PS1='\[\033[02;31m\]\u@\H:\[\033[01;34m\]\w$\[\033[00m\] '" >>  ~/.bashrc
+#================================================================
